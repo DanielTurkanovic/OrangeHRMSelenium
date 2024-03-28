@@ -19,7 +19,7 @@ namespace OrangeHrmSeleniumTests.UserManagementTests
                 .ClickOnAddButton()
                 .AddUser()
                 .SearchForAddedUser()
-                .DelateWorkShifts();
+                .DelateAddedUser();
 
             IWebElement WorkShifts = Driver.FindElement(By.XPath("//div[@role='table']"));
 

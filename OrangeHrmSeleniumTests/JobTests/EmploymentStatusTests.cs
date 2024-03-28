@@ -10,9 +10,10 @@ namespace OrangeHrmSeleniumTests.JobTests
         public void EditEmploymentStatusTests()
         {
             ExtentReporting.Instance.LogInfo("Start testing - Employment status from Job drop down menu");
+
             var specificForm = (EmploymentStatus)WebForm;
             specificForm
-            .EditEmploymentStatus()
+            .AddingEmploymentStatus()
             .DeleteEmploymentStatus();
 
             IWebElement EmployeeStatusTable = Driver.FindElement(By.XPath("//div[@role='table']"));

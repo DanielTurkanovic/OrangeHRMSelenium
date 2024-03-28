@@ -2,12 +2,15 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using Utilities.Common;
+using Utilities.Extent;
 
 namespace OrangeHrmSelenium.AdminTab.Job
 {
     public class WorkShifts
     {
         IWebDriver driver;
+        CommonTools commonTools;
 
         // Locators
         IWebElement AdminTabButton => driver.FindElement(By.XPath("//a[contains(@href, '/web/index.php/admin/viewAdminModule')]"));
@@ -21,18 +24,21 @@ namespace OrangeHrmSelenium.AdminTab.Job
         IWebElement HourButtonDownPM => driver.FindElement(By.XPath("//i[@class='oxd-icon bi-chevron-down oxd-icon-button__icon oxd-time-hour-input-down']"));
         IWebElement AssignedEmployees => driver.FindElement(By.XPath("//input[@placeholder='Type for hints...']"));
         IWebElement SaveButton => driver.FindElement(By.XPath("//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']"));
-        IWebElement YesDeleteButton => driver.FindElement(By.XPath("//button[@class='oxd-button oxd-button--medium oxd-button--label-danger orangehrm-button-margin']"));
-
+        IWebElement TrashIcon => driver.FindElement(By.XPath("//div[contains(text(),'LazyQaEngineer')]/ancestor::div[@role='row']/descendant::i[contains(@class,'bi-trash')]"));
+        IWebElement YesDeleteButton => driver.FindElement(By.XPath("//button[@class='oxd-button oxd-button--medium oxd-button--label-danger orangehrm-button-margin']")); 
 
         // Constructor
         public WorkShifts(IWebDriver driver)
         {
             this.driver = driver;
+            commonTools = new CommonTools(driver);
         }
 
         // Methods
         public WorkShifts AddWorkShift()
         {
+            ExtentReporting.Instance.LogInfo($"Click Work Shifts from drop down manu and add Work Shift");
+
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
             wait.Until(ExpectedConditions.ElementToBeClickable(AdminTabButton));
 
@@ -60,6 +66,7 @@ namespace OrangeHrmSelenium.AdminTab.Job
             actions.MoveToElement(body, 0, 0).Click().Perform();
 
             AssignedEmployees.SendKeys("LazyQaEngineer");
+            commonTools.HighlightElement(SaveButton, driver);
             SaveButton.Click();
             Task.Delay(3000);
 
@@ -68,9 +75,12 @@ namespace OrangeHrmSelenium.AdminTab.Job
 
         public WorkShifts DelateWorkShifts()
         {
-            IWebElement TrashIcon = driver.FindElement(By.XPath("//div[contains(text(),'LazyQaEngineer')]/ancestor::div[@role='row']/descendant::i[contains(@class,'bi-trash')]"));
+            ExtentReporting.Instance.LogInfo($"Delete added Work Shift");
+
             TrashIcon.Click();
+            commonTools.HighlightElement(YesDeleteButton, driver);
             YesDeleteButton.Click();
+            Task.Delay(3000);
 
             return this;
         }

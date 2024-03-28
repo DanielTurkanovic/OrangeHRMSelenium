@@ -10,6 +10,7 @@ namespace OrangeHrmSeleniumTests.JobTests
         public void AddJobTitle()
         {
             ExtentReporting.Instance.LogInfo("Start testing - Add Job Titles");
+
             var specificForm = (JobTitles)WebForm;
             specificForm
                 .AddJobTitles()

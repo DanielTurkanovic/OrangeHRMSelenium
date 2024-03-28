@@ -2,12 +2,15 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using Utilities.Common;
+using Utilities.Extent;
 
 namespace OrangeHrmSelenium.AdminTab.Job
 {
     public class PayGrades
     {
         IWebDriver driver;
+        CommonTools commonTools;
 
         // Locators
         IWebElement AdminTabButton => driver.FindElement(By.XPath("//a[contains(@href, '/web/index.php/admin/viewAdminModule')]"));
@@ -20,7 +23,8 @@ namespace OrangeHrmSelenium.AdminTab.Job
         IWebElement CurrencySelectDropDownMenu => driver.FindElement(By.XPath("//i[@class='oxd-icon bi-caret-down-fill oxd-select-text--arrow']"));
         IWebElement CurrencySelect => driver.FindElement(By.XPath("//div[@role='option']/span[contains(text(),'EUR - Euro')]"));
         IWebElement InputMinimumSalary => driver.FindElement(By.XPath("(//input[@class='oxd-input oxd-input--active'])[3]"));
-        //IWebElement DeleteButton => driver.FindElement(By.XPath("(//button[@class='oxd-icon-button oxd-table-cell-action-space'])[11]"));
+        IWebElement TrashIcon => driver.FindElement(By.XPath("//div[contains(text(),'QA Engineer')]/ancestor::div[@role='row']/descendant::i[contains(@class,'bi-trash')]"));
+
         IWebElement YesDeleteButton => driver.FindElement(By.XPath("//button[@class='oxd-button oxd-button--medium oxd-button--label-danger orangehrm-button-margin']"));
        
 
@@ -28,6 +32,7 @@ namespace OrangeHrmSelenium.AdminTab.Job
         public PayGrades(IWebDriver driver)
         {
             this.driver = driver;
+            commonTools = new CommonTools(driver);
         }
 
         // Methods
@@ -36,12 +41,16 @@ namespace OrangeHrmSelenium.AdminTab.Job
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
             wait.Until(ExpectedConditions.ElementToBeClickable(AdminTabButton));
 
+            ExtentReporting.Instance.LogInfo("Add Pay Grades");
+
             AdminTabButton.Click();
             JobDropDownList.Click();
             PayGradesFromDropDownMenu.Click();
             AddButton.Click();
             InputName.SendKeys("QA Engineer");
+            commonTools.HighlightElement(SaveButton, driver);
             SaveButton.Click();
+            Task.Delay(3000);
             CurrenciesAddButton.Click();
             CurrencySelectDropDownMenu.Click();
             CurrencySelect.Click();
@@ -81,10 +90,12 @@ namespace OrangeHrmSelenium.AdminTab.Job
 
         public PayGrades DeletePayGrades()
         {
-            IWebElement TrashIcon = driver.FindElement(By.XPath("//div[contains(text(),'QA Engineer')]/ancestor::div[@role='row']/descendant::i[contains(@class,'bi-trash')]"));
+            ExtentReporting.Instance.LogInfo("Delete Pay Grades");
+
             TrashIcon.Click();
+            commonTools.HighlightElement(YesDeleteButton, driver);
             YesDeleteButton.Click();
-            return this;
+            Task.Delay(3000);
 
             return this;
         }

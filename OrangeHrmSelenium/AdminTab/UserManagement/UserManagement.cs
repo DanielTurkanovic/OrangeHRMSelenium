@@ -3,12 +3,15 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using OrangeHrmSelenium.AdminTab.Job;
 using SeleniumExtras.WaitHelpers;
+using Utilities.Common;
+using Utilities.Extent;
 
 namespace OrangeHrmSelenium.AdminTab.UserManagement
 {
     public class UserManagement
     {
         IWebDriver driver;
+        CommonTools commonTools;
 
         // Locators
         IWebElement AdminTabButton => driver.FindElement(By.XPath("//a[contains(@href, '/web/index.php/admin/viewAdminModule')]"));
@@ -32,11 +35,14 @@ namespace OrangeHrmSelenium.AdminTab.UserManagement
         public UserManagement(IWebDriver driver)
         {
             this.driver = driver;
+            commonTools = new CommonTools(driver);
         }
 
         // Methods
         public UserManagement ClickOnAdminTabButton()
         {
+            ExtentReporting.Instance.LogInfo($"Click Admin tab button from side menu");
+
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
             wait.Until(ExpectedConditions.ElementToBeClickable(AdminTabButton));
 
@@ -48,6 +54,8 @@ namespace OrangeHrmSelenium.AdminTab.UserManagement
 
         public UserManagement ClickOnAddButton()
         {
+            ExtentReporting.Instance.LogInfo($"Click on Add user button");
+
             AddUserButton.Click();
             driver.Navigate().GoToUrl("https://opensource-demo.orangehrmlive.com/web/index.php/admin/saveSystemUser");
 
@@ -56,6 +64,8 @@ namespace OrangeHrmSelenium.AdminTab.UserManagement
 
         public UserManagement AddUser()
         {
+            ExtentReporting.Instance.LogInfo($"Adding user");
+
             UserRoleDropDown.Click();
             AdminUserRole.Click();
             Actions actions = new Actions(driver);
@@ -70,14 +80,17 @@ namespace OrangeHrmSelenium.AdminTab.UserManagement
             Password.SendKeys("Admin123");
             Thread.Sleep(1000);
             ConfirmPassword.SendKeys("Admin123");
+            commonTools.HighlightElement(SaveButton, driver);
             SaveButton.Click();
-            
+            Task.Delay(3000);
 
             return this;
         }
 
         public UserManagement SearchForAddedUser()
         {
+            ExtentReporting.Instance.LogInfo($"Search added user");
+
             Thread.Sleep(3000);
             Username.SendKeys("bugs b");
             Thread.Sleep(3000);
@@ -86,11 +99,15 @@ namespace OrangeHrmSelenium.AdminTab.UserManagement
             return this;
         }
 
-        public UserManagement DelateWorkShifts()
+        public UserManagement DelateAddedUser()
         {
+            ExtentReporting.Instance.LogInfo($"Delete Added user");
+
             IWebElement trashIcon = driver.FindElement(By.XPath("//div[contains(text(),'bugs b')]/ancestor::div[@role='row']/descendant::i[contains(@class,'bi-trash')]"));
             trashIcon.Click();
+            commonTools.HighlightElement(YesDeleteButton, driver);
             YesDeleteButton.Click();
+            Task.Delay(3000);
 
             return this;
         }

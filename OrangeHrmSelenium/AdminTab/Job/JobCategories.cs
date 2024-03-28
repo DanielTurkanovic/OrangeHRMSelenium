@@ -2,12 +2,15 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using Utilities.Common;
+using Utilities.Extent;
 
 namespace OrangeHrmSelenium.AdminTab.Job
 {
     public class JobCategories
     {
         IWebDriver driver;
+        CommonTools commonTools;
 
         // Locators
         IWebElement AdminTabButton => driver.FindElement(By.XPath("//a[contains(@href, '/web/index.php/admin/viewAdminModule')]"));
@@ -16,6 +19,8 @@ namespace OrangeHrmSelenium.AdminTab.Job
         IWebElement JobCategoryEdit => driver.FindElement(By.XPath("(//i[@class='oxd-icon bi-pencil-fill'])[1]"));
         IWebElement NameJobCategoryEdit => driver.FindElement(By.XPath("(//input[@class='oxd-input oxd-input--active'])[2]"));
         IWebElement SaveButton => driver.FindElement(By.XPath("(//button[@type='submit'])"));
+        IWebElement TrashIcon => driver.FindElement(By.XPath("//div[contains(text(),'QA Tester')]/ancestor::div[@role='row']/descendant::i[contains(@class,'bi-trash')]"));
+
         IWebElement YesDeleteButton => driver.FindElement(By.XPath("//button[@class='oxd-button oxd-button--medium oxd-button--label-danger orangehrm-button-margin']"));
 
 
@@ -23,11 +28,14 @@ namespace OrangeHrmSelenium.AdminTab.Job
         public JobCategories(IWebDriver driver)
         {
             this.driver = driver;
+            commonTools = new CommonTools(driver);
         }
 
         // Methods
         public JobCategories ChoseJobCategoriesFromDropDownMenu() 
         {
+            ExtentReporting.Instance.LogInfo("Chose Job Categories from drop down menu");
+
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
             wait.Until(ExpectedConditions.ElementToBeClickable(AdminTabButton));
 
@@ -43,6 +51,7 @@ namespace OrangeHrmSelenium.AdminTab.Job
                    .SendKeys(Keys.Delete)
                    .SendKeys("QA Tester")
                    .Perform();
+            commonTools.HighlightElement(SaveButton, driver);
             SaveButton.Click();
 
             return this;
@@ -50,8 +59,10 @@ namespace OrangeHrmSelenium.AdminTab.Job
 
         public JobCategories DeleteJobCategories() 
         {
-            IWebElement TrashIcon = driver.FindElement(By.XPath("//div[contains(text(),'QA Tester')]/ancestor::div[@role='row']/descendant::i[contains(@class,'bi-trash')]"));
+            ExtentReporting.Instance.LogInfo("Delete Job Categories");
+
             TrashIcon.Click();
+            commonTools.HighlightElement(YesDeleteButton, driver);
             YesDeleteButton.Click();
             return this;
 

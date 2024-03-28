@@ -10,6 +10,7 @@ namespace OrangeHrmSeleniumTests.JobTests
         public void AddAndDeletePayGradeTest()
         {
             ExtentReporting.Instance.LogInfo("Start testing - Add and delete Pay Grades");
+
             var specificForm = (PayGrades)WebForm;
             specificForm
                 .AddPayGrades()

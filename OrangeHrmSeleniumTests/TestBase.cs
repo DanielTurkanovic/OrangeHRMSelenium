@@ -1,7 +1,8 @@
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OrangeHrmSelenium.AdminTab.Job;
+using OrangeHrmSelenium.AdminTab.Job  ;
+using OrangeHrmSelenium.AdminTab.Organization;
 using OrangeHrmSelenium.AdminTab.UserManagement;
 using OrangeHrmSelenium.Login;
 using OrangeHrmSelenium.Logout;
@@ -21,7 +22,8 @@ namespace OrangeHrmSeleniumTests
             EmploymentStatus,
             PayGrades,
             WorkShifts,
-            JobTitles
+            JobTitles,
+            Locations
         }
         protected IWebDriver Driver { get; private set; }
         protected Browser Browser { get; private set; }
@@ -93,7 +95,11 @@ namespace OrangeHrmSeleniumTests
             }
             else if (testClassName.Equals("OrangeHrmSeleniumTests.JobTests.JobTitlesTests"))
             {
-                CurrentFormType= FormType.JobTitles;
+                CurrentFormType = FormType.JobTitles;
+            }
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.Organization.LocationsTests"))
+            {
+                CurrentFormType = FormType.Locations;
             }
         }
 
@@ -126,6 +132,9 @@ namespace OrangeHrmSeleniumTests
                     break;
                 case FormType.JobTitles:
                     WebForm = new JobTitles(Driver);
+                    break;
+                case FormType.Locations:
+                    WebForm = new Locations(Driver);
                     break;
             }
         }

@@ -10,6 +10,7 @@ namespace OrangeHrmSeleniumTests.JobTests
         public void AddWorkShiftsTest()
         {
             ExtentReporting.Instance.LogInfo("Start testing - Add Work Shift");
+
             var specificForm = (WorkShifts)WebForm;
             specificForm
                 .AddWorkShift()
