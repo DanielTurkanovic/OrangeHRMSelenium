@@ -21,8 +21,7 @@ namespace OrangeHrmSelenium.AdminTab.UserManagement
         IWebElement StatusDropDown => driver.FindElement(By.XPath("(//div[@class='oxd-select-text-input'])[2]"));
         IWebElement EnabledStatus => driver.FindElement(By.XPath("(//div[@class='oxd-select-option'])[3]"));
         IWebElement EmployeeName => driver.FindElement(By.XPath("(//div[@class='oxd-autocomplete-text-input oxd-autocomplete-text-input--active'])"));
-        IWebElement EmployeeNameFromDropDown => driver.FindElement(By.XPath("//span[contains(text(),'Odis  Adalwin')]"));
-
+        IWebElement EmployeeNameFromDropDown => driver.FindElement(By.XPath("(//div[@class='oxd-autocomplete-option'])[1]"));
         IWebElement Username => driver.FindElement(By.XPath("(//input[@class='oxd-input oxd-input--active'])[2]"));
         IWebElement Password => driver.FindElement(By.XPath("(//input[@type='password'])[1]"));
         IWebElement ConfirmPassword => driver.FindElement(By.XPath("(//input[@type='password'])[2]"));
@@ -71,6 +70,7 @@ namespace OrangeHrmSelenium.AdminTab.UserManagement
             Actions actions = new Actions(driver);
             actions.MoveToElement(EmployeeName).Click().Build().Perform();
             actions.SendKeys("a").Build().Perform();
+            Task.Delay(3000).Wait();
             EmployeeNameFromDropDown.Click();
             StatusDropDown.Click();
             EnabledStatus.Click();

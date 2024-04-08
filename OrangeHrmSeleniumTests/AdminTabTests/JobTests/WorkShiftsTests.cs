@@ -2,7 +2,7 @@
 using OrangeHrmSelenium.AdminTab.Job;
 using Utilities.Extent;
 
-namespace OrangeHrmSeleniumTests.JobTests
+namespace OrangeHrmSeleniumTests.AdminTabTests.JobTests
 {
     public class WorkShiftsTests : TestBase
     {

@@ -2,7 +2,7 @@
 using OrangeHrmSelenium.AdminTab.Organization;
 using Utilities.Extent;
 
-namespace OrangeHrmSeleniumTests.Organization
+namespace OrangeHrmSeleniumTests.AdminTabTests.OrganizationTests
 {
     public class LocationsTests : TestBase
     {

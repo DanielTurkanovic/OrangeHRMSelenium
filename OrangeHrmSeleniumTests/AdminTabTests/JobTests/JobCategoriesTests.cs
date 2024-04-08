@@ -2,13 +2,13 @@
 using OrangeHrmSelenium.AdminTab.Job;
 using Utilities.Extent;
 
-namespace OrangeHrmSeleniumTests.JobTests
+namespace OrangeHrmSeleniumTests.AdminTabTests.JobTests
 {
     public class JobCategoriesTest : TestBase
     {
         [Test]
-            public void EditJobCategoriesTests()
-            {
+        public void EditJobCategoriesTests()
+        {
             ExtentReporting.Instance.LogInfo("Start testing - Job Categories from Job drop down menu");
 
             var specificForm = (JobCategories)WebForm;
@@ -26,7 +26,7 @@ namespace OrangeHrmSeleniumTests.JobTests
             {
                 IList<IWebElement> cells = row.FindElements(By.XPath(".//div[@role='cell']"));
 
-                foreach (var cell in cells) 
+                foreach (var cell in cells)
                 {
                     if (cell.Text.Contains("QA Tester"))
                     {
@@ -41,5 +41,5 @@ namespace OrangeHrmSeleniumTests.JobTests
                 }
             }
         }
-    } 
+    }
 }

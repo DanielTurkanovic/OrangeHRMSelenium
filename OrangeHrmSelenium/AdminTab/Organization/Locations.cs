@@ -2,12 +2,7 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
-using System.Security.Cryptography;
-using System;
 using Bogus;
-using static System.Net.Mime.MediaTypeNames;
-using System.Diagnostics.Metrics;
-using OpenQA.Selenium.DevTools.V120.HeapProfiler;
 using Utilities.Common;
 using Utilities.Extent;
 
@@ -29,7 +24,6 @@ namespace OrangeHrmSelenium.AdminTab.Organization
         IWebElement ZipCode => driver.FindElement(By.XPath("(//input[@class='oxd-input oxd-input--active'])[5]"));
         IWebElement Country => driver.FindElement(By.XPath("//div[@class='oxd-select-text-input']"));
         IWebElement CountryDropDownMenu => driver.FindElement(By.XPath("//span[contains(text(), 'Canada')]"));
-
         IWebElement Phone => driver.FindElement(By.XPath("(//input[@class='oxd-input oxd-input--active'])[6]"));
         IWebElement parentElementAddress => driver.FindElement(By.ClassName("oxd-input-group__label-wrapper"));
         IWebElement Address => parentElementAddress.FindElement(By.XPath("//textarea[@placeholder='Type here ...']"));

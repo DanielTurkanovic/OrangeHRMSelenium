@@ -3,7 +3,7 @@ using OrangeHrmSelenium.AdminTab.UserManagement;
 using SeleniumExtras.WaitHelpers;
 using Utilities.Extent;
 
-namespace OrangeHrmSeleniumTests.UserManagementTests
+namespace OrangeHrmSeleniumTests.AdminTabTests.UserManagementTests
 {
     public class UserManagementTests : TestBase
     {

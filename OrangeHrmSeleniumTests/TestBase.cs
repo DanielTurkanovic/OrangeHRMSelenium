@@ -3,9 +3,11 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OrangeHrmSelenium.AdminTab.Job  ;
 using OrangeHrmSelenium.AdminTab.Organization;
+using OrangeHrmSelenium.AdminTab.Qualifications;
 using OrangeHrmSelenium.AdminTab.UserManagement;
 using OrangeHrmSelenium.Login;
 using OrangeHrmSelenium.Logout;
+using OrangeHrmSelenium.PimTab.EmployeeList;
 using Utilities.Common;
 using Utilities.Extent;
 
@@ -23,7 +25,11 @@ namespace OrangeHrmSeleniumTests
             PayGrades,
             WorkShifts,
             JobTitles,
-            Locations
+            Locations,
+            GeneralInformation,
+            Skills,
+            EmployeeList
+            
         }
         protected IWebDriver Driver { get; private set; }
         protected Browser Browser { get; private set; }
@@ -73,33 +79,45 @@ namespace OrangeHrmSeleniumTests
         private void SetFormTypeFromTestClass()
         {
             string testClassName = TestContext.CurrentContext.Test.ClassName;
-            if (testClassName.Equals("OrangeHrmSeleniumTests.UserManagementTests.UserManagementTests"))
+            if (testClassName.Equals("OrangeHrmSeleniumTests.AdminTabTests.UserManagementTests.UserManagementTests"))
             {
                 CurrentFormType = FormType.UserManagement;
             }
-            else if (testClassName.Equals("OrangeHrmSeleniumTests.JobTests.JobCategoriesTest"))
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.AdminTabTests.JobTests.JobCategoriesTest"))
             {
                 CurrentFormType = FormType.JobCategories;
             }
-            else if (testClassName.Equals("OrangeHrmSeleniumTests.JobTests.EmploymentStatusTests"))
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.AdminTabTests.JobTests.EmploymentStatusTests"))
             {
                 CurrentFormType = FormType.EmploymentStatus;
             }
-            else if (testClassName.Equals("OrangeHrmSeleniumTests.JobTests.PayGradesTests"))
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.AdminTabTests.JobTests.PayGradesTests"))
             {
                 CurrentFormType = FormType.PayGrades;
             }
-            else if (testClassName.Equals("OrangeHrmSeleniumTests.JobTests.WorkShiftsTests"))
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.AdminTabTests.JobTests.WorkShiftsTests"))
             {
                 CurrentFormType = FormType.WorkShifts;
             }
-            else if (testClassName.Equals("OrangeHrmSeleniumTests.JobTests.JobTitlesTests"))
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.AdminTabTests.JobTests.JobTitlesTests"))
             {
                 CurrentFormType = FormType.JobTitles;
             }
-            else if (testClassName.Equals("OrangeHrmSeleniumTests.Organization.LocationsTests"))
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.AdminTabTests.OrganizationTests.LocationsTests"))
             {
                 CurrentFormType = FormType.Locations;
+            }
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.AdminTabTests.OrganizationTests.GeneralInformationTests"))
+            {
+                CurrentFormType = FormType.GeneralInformation;
+            }
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.AdminTabTests.QualificationsTests.SkillsTests"))
+            {
+                CurrentFormType = FormType.Skills;
+            }
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.PimTabTests.AddEmployee.EmployeeListTests"))
+            {
+                CurrentFormType = FormType.EmployeeList;
             }
         }
 
@@ -136,6 +154,16 @@ namespace OrangeHrmSeleniumTests
                 case FormType.Locations:
                     WebForm = new Locations(Driver);
                     break;
+                case FormType.GeneralInformation:
+                    WebForm = new GeneralInformation(Driver);
+                    break;
+                case FormType.Skills:
+                    WebForm = new Skills(Driver);
+                    break;
+                case FormType.EmployeeList:
+                    WebForm = new EmployeeList(Driver);
+                    break;
+                
             }
         }
 
