@@ -8,6 +8,7 @@ using OrangeHrmSelenium.AdminTab.UserManagement;
 using OrangeHrmSelenium.Login;
 using OrangeHrmSelenium.Logout;
 using OrangeHrmSelenium.PimTab.EmployeeList;
+using OrangeHrmSelenium.PimTab.Reports;
 using Utilities.Common;
 using Utilities.Extent;
 
@@ -28,7 +29,8 @@ namespace OrangeHrmSeleniumTests
             Locations,
             GeneralInformation,
             Skills,
-            EmployeeList
+            EmployeeList,
+            Reports
             
         }
         protected IWebDriver Driver { get; private set; }
@@ -115,9 +117,13 @@ namespace OrangeHrmSeleniumTests
             {
                 CurrentFormType = FormType.Skills;
             }
-            else if (testClassName.Equals("OrangeHrmSeleniumTests.PimTabTests.AddEmployee.EmployeeListTests"))
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.PimTabTests.EmployeeListTests.EmploeeListTests"))
             {
                 CurrentFormType = FormType.EmployeeList;
+            }
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.PimTabTests.ReportsTests.ReportTests"))
+            {
+                CurrentFormType = FormType.Reports;
             }
         }
 
@@ -162,6 +168,9 @@ namespace OrangeHrmSeleniumTests
                     break;
                 case FormType.EmployeeList:
                     WebForm = new EmployeeList(Driver);
+                    break;
+                case FormType.Reports:
+                    WebForm = new Reports(Driver);
                     break;
                 
             }
