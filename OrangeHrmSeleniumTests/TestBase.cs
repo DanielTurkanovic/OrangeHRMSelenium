@@ -5,6 +5,7 @@ using OrangeHrmSelenium.AdminTab.Job  ;
 using OrangeHrmSelenium.AdminTab.Organization;
 using OrangeHrmSelenium.AdminTab.Qualifications;
 using OrangeHrmSelenium.AdminTab.UserManagement;
+using OrangeHrmSelenium.LeaveTab.Entitlements;
 using OrangeHrmSelenium.Login;
 using OrangeHrmSelenium.Logout;
 using OrangeHrmSelenium.PimTab.EmployeeList;
@@ -30,7 +31,8 @@ namespace OrangeHrmSeleniumTests
             GeneralInformation,
             Skills,
             EmployeeList,
-            Reports
+            Reports,
+            Entitlements
             
         }
         protected IWebDriver Driver { get; private set; }
@@ -125,6 +127,10 @@ namespace OrangeHrmSeleniumTests
             {
                 CurrentFormType = FormType.Reports;
             }
+            else if (testClassName.Equals("OrangeHrmSeleniumTests.LeaveTabTests.EntitlementsTests.EntitlementsTests")) 
+            {
+                CurrentFormType = FormType.Entitlements;
+            }
         }
 
         public void SwitchToForm(FormType formType)
@@ -171,6 +177,9 @@ namespace OrangeHrmSeleniumTests
                     break;
                 case FormType.Reports:
                     WebForm = new Reports(Driver);
+                    break;
+                case FormType.Entitlements:
+                    WebForm = new Entitlements(Driver);
                     break;
                 
             }
