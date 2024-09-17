@@ -10,7 +10,7 @@ namespace OrangeHrmSeleniumTests.PimTabTests.ReportsTests
         [Test]
         public void AddReport()
         {
-            ExtentReporting.Instance.LogInfo("Start testing - Adding Report");
+            ExtentReporting.Instance.LogInfo("Start testing - Adding Report"); 
             var specificForm = (Reports)WebForm;
             specificForm
             .AddReports()
@@ -36,9 +36,9 @@ namespace OrangeHrmSeleniumTests.PimTabTests.ReportsTests
                     }
                 }
 
-                if (!McDuck)
+                if (!McDuck) 
                 {
-                    Assert.IsTrue(true, "The McDuck value was successfully deleted from the table");
+                    Assert.That(true, "The McDuck value was successfully deleted from the table");
                 }
             }
         }

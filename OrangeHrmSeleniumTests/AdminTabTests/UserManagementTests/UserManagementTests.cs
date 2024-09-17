@@ -42,7 +42,7 @@ namespace OrangeHrmSeleniumTests.AdminTabTests.UserManagementTests
 
                 if (!BugsB)
                 {
-                    Assert.IsTrue(true, "The bugs b value was successfully deleted from the table");
+                    Assert.That(true, "The bugs b value was successfully deleted from the table");
                 }
             }
         }

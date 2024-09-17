@@ -42,7 +42,7 @@ namespace OrangeHrmSeleniumTests.AdminTabTests.QualificationsTests
 
                 if (!Selenium)
                 {
-                    Assert.IsTrue(true, "The C# Seleniumk value was successfully deleted from the table");
+                    Assert.That(true, "The C# Seleniumk value was successfully deleted from the table");
                 }
             }
         }

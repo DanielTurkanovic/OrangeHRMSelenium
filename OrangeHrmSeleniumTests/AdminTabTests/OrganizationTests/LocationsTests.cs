@@ -37,7 +37,7 @@ namespace OrangeHrmSeleniumTests.AdminTabTests.OrganizationTests
 
                 if (!DonaldDuck)
                 {
-                    Assert.IsTrue(true, "The Donald Duck value was successfully deleted from the table");
+                    Assert.That(true, "The Donald Duck value was successfully deleted from the table");
                 }
             }
         }

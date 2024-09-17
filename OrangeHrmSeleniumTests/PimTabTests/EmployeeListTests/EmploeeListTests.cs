@@ -35,7 +35,7 @@ namespace OrangeHrmSeleniumTests.PimTabTests.EmployeeListTests
 
                 if (!McDuck)
                 {
-                    Assert.IsTrue(true, "The McDuck value was successfully deleted from the table");
+                    Assert.That(true, "The McDuck value was successfully deleted from the table");
                 }
             }
         }

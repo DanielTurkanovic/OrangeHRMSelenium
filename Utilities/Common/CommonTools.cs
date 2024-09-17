@@ -16,10 +16,10 @@ namespace Utilities.Common
             // Keeping the element's original style
             string originalStyle = element.GetAttribute("style");
 
-            // Create a JavaScriptExecutor object that enables the execution of Javascript code
+            // Create a JavaScriptExecutor object  enables the execution of Javascript code
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
 
-            // Change the style of the element so that it has a 3px thick red dashed border
+            // Change the style of the element so  it has a 3px thick red dashed border
             js.ExecuteScript("arguments[0].setAttribute('style', arguments[1]);", element, "border: 3px solid red; border-style: dashed;");
 
             // Waiting 2 seconds to see the effect

@@ -19,7 +19,7 @@ namespace OrangeHrmSeleniumTests.LeaveTabTests.EntitlementsTests
 
             if (NoRecordsFound.Displayed) 
             {
-                Assert.IsTrue(true, "Record is deleted");
+                Assert.That(true, "Record is deleted");
             }
             else
             {

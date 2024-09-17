@@ -188,11 +188,26 @@ namespace OrangeHrmSeleniumTests
         [TearDown]
         public void TearDown()
         {
-            PageLogout();
-            EndTest();
-            ExtentReporting.Instance.EndReporting();
-            Driver.Quit();
+            try
+            {
+                PageLogout();
+                EndTest();
+            }
+            finally
+            {
+                if (ExtentReporting.Instance != null)
+                {
+                    ExtentReporting.Instance.EndReporting();
+                }
+
+                if (Driver != null)
+                {
+                    Driver.Quit();
+                    Driver.Dispose(); 
+                }
+            }
         }
+
 
         private void EndTest()
         {

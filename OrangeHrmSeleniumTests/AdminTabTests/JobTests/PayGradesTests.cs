@@ -37,7 +37,7 @@ namespace OrangeHrmSeleniumTests.AdminTabTests.JobTests
 
                 if (!QAEngineerFound)
                 {
-                    Assert.IsTrue(true, "The Test status value was successfully deleted from the table");
+                    Assert.That(true, "The Test status value was successfully deleted from the table");
                 }
             }
         }

@@ -37,7 +37,7 @@ namespace OrangeHrmSeleniumTests.AdminTabTests.JobTests
 
                 if (!LazyQaEngineer)
                 {
-                    Assert.IsTrue(true, "The Lazy Qa Engineers value was successfully deleted from the table");
+                    Assert.That(true, "The Lazy Qa Engineers value was successfully deleted from the table");
                 }
             }
         }
